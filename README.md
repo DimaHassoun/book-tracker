@@ -107,55 +107,6 @@ The idea behind it: a book isn't good or bad in isolation — timing matters. A 
 
 See the [blueprint](./BookTracker_Project_Blueprint_v3.md) for the full step-by-step build plan.
 
----
-
-## Running it locally
-
-### Prerequisites
-- Java 21
-- Docker + Docker Compose
-- A [Google Books API key](https://console.cloud.google.com/) (free tier)
-
-### Setup
-
-1. Clone the repo:
-   ```bash
-   git clone https://github.com/<your-username>/book-tracker.git
-   cd book-tracker
-   ```
-
-2. Copy the environment template and fill in your own values:
-   ```bash
-   cp .env.example .env
-   ```
-   Edit `.env`:
-   ```env
-   DB_USERNAME=booktracker
-   DB_PASSWORD=choose_a_local_password
-   POSTGRES_DB=booktracker
-   JWT_SECRET=generate_a_long_random_string
-   GOOGLE_BOOKS_API_KEY=your_google_books_api_key
-   ```
-
-3. Start PostgreSQL:
-   ```bash
-   docker compose up -d
-   ```
-
-4. Run the app:
-   ```bash
-   ./mvnw spring-boot:run
-   ```
-   Environment variables are loaded automatically from `.env` at startup — no manual shell exports needed.
-
-5. The API is available at `http://localhost:8080`.
-
-### Notes
-- `.env` is never committed — see `.env.example` for the variables you need to supply.
-- Database migrations run automatically via Flyway on startup.
-
----
-
 ## Known limitations
 
 - No frontend yet — backend/API only at this stage.
