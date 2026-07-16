@@ -105,8 +105,6 @@ The idea behind it: a book isn't good or bad in isolation — timing matters. A 
 
 **Deferred to V2:** AI Reading Advisor, followers/feed, advanced analytics, countdown timer.
 
-See the [blueprint](./BookTracker_Project_Blueprint_v3.md) for the full step-by-step build plan.
-
 ## Known limitations
 
 - No frontend yet — backend/API only at this stage.
