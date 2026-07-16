@@ -20,8 +20,6 @@ So I'm building the tool I wanted: one that shows my reading history clearly eno
 
 This is a portfolio project, but the motivation is real: demonstrating Clean Architecture in a real Spring Boot backend, deliberate documented product decisions, and a schema built to handle real complexity (rereads, status history, structured feedback) without hacks.
 
-Full product reasoning, database design rationale, and the build roadmap live in [`BookTracker_Project_Blueprint_v3.md`](./BookTracker_Project_Blueprint_v3.md).
-
 ---
 
 ## Core principles
