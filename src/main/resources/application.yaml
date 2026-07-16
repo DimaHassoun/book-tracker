@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: book-tracker
+    
+  datasource:
+    url: jdbc:postgresql://localhost:5432/booktracker
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    
+  jpa:
+    hibernate:
+      ddl-auto: validate
+      
+  flyway:
+    enabled: true
+    
+  profiles:
+    active: dev
+
+
+app:
+  jwt:
+    secret: ${JWT_SECRET}
+    expiration-ms: ${JWT_EXPIRATION_MS:3600000}
+
+  google-books:
+    api-key: ${GOOGLE_BOOKS_API_KEY}
