@@ -6,6 +6,28 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.util.UUID;
 
+/**
+ * A single reading attempt of a book — one row per read, including
+ * rereads. {@code readNumber} is 1 for the first attempt, 2 for the first
+ * reread, and so on, assigned as {@code MAX(readNumber) + 1} for the parent
+ * {@link UserBook} at creation time.
+ * 
+ * Every field here follows a strict "don't invent data" rule:
+ * 
+ *   - {@code currentPage} is never auto-defaulted to 0 — null means the
+ *       user didn't report a page, not that they're at the start.</li>
+ *   - {@code startDate} is only auto-populated when the initiating action
+ *       is {@code READING} (starting to read is inherently "as of now");
+ *       for {@code READ}, {@code DNF}, or {@code PAUSED} as a first action,
+ *       it stays null unless the user explicitly supplies it — those
+ *       actions don't logically imply a start moment.</li>
+ *   - {@code endDate} is only auto-populated for {@code READ}/{@code DNF},
+ *       which do logically imply completion.
+ * 
+ * See {@link com.booktracker.book_tracker.application.usecase.library.StartReadingInstanceUseCase}
+ * for where these rules are actually applied.
+ */
+
 public class ReadingInstance {
 
     private UUID id;

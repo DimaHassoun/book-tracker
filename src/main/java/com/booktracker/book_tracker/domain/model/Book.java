@@ -5,6 +5,16 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * Canonical, catalog-level book data — shared across every user who has
+ * added this book, never duplicated per user. A {@code Book} always
+ * originates from an external source ({@link com.booktracker.book_tracker.domain.valueobject.ExternalSource})
+ * and is resolved/created idempotently by
+ * {@link com.booktracker.book_tracker.application.usecase.book.BookResolver}
+ * on first reference — never hand-constructed with arbitrary user-supplied
+ * metadata outside that path.
+ */
+
 public class Book {
 
     private UUID id;

@@ -9,5 +9,6 @@ public record AddBookToLibraryOutput(
         UUID userBookId,
         UUID bookId,
         BookFormat ownedFormat,
-        Instant createdAt
+        Instant createdAt,
+        boolean created   // true only if this call created a new user_books row
 ) {}

@@ -7,7 +7,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import com.booktracker.book_tracker.domain.exception.ExternalServiceException;
-import com.booktracker.book_tracker.domain.exception.DuplicateBookException;
+import com.booktracker.book_tracker.domain.exception.DuplicateReadingInstanceException;
+import com.booktracker.book_tracker.domain.exception.UserBookNotFoundException ;
+import com.booktracker.book_tracker.domain.exception.ActiveReadingInstanceExistsException ;
+import com.booktracker.book_tracker.domain.exception.ReadingInstanceNotFoundException;
+import com.booktracker.book_tracker.domain.exception.RereadConfirmationRequiredException;
+import com.booktracker.book_tracker.domain.exception.InvalidReadingStatusException;
+import com.booktracker.book_tracker.domain.exception.InvalidReadingSessionException;
 
 import java.util.Map;
 
@@ -39,9 +45,46 @@ public class GlobalExceptionHandler {
           		  ));
 	}
 	
-	@ExceptionHandler(DuplicateBookException.class)
-	public ResponseEntity<Map<String, Object>> handleDuplicateBook(DuplicateBookException ex) {
-   	 return ResponseEntity.status(HttpStatus.CONFLICT)
-   	         .body(Map.of("status", 409, "title", "Duplicate Book", "detail", ex.getMessage()));
+	
+	@ExceptionHandler(UserBookNotFoundException.class)
+	public ResponseEntity<Map<String, Object>> handleUserBookNotFound(UserBookNotFoundException ex) {
+  	  return ResponseEntity.status(HttpStatus.NOT_FOUND)
+  	          .body(Map.of("status", 404, "title", "User Book Not Found", "detail", ex.getMessage()));
+	}
+
+	@ExceptionHandler(ActiveReadingInstanceExistsException.class)
+	public ResponseEntity<Map<String, Object>> handleActiveReadingInstanceExists(ActiveReadingInstanceExistsException ex) {
+ 	   return ResponseEntity.status(HttpStatus.CONFLICT)
+    	        .body(Map.of("status", 409, "title", "Active Reading Instance Exists", "detail", ex.getMessage()));
+	}
+
+	@ExceptionHandler(DuplicateReadingInstanceException.class)
+	public ResponseEntity<Map<String, Object>> handleDuplicateReadingInstance(DuplicateReadingInstanceException ex) {
+ 	   return ResponseEntity.status(HttpStatus.CONFLICT)
+    	        .body(Map.of("status", 409, "title", "Duplicate Reading Instance", "detail", ex.getMessage()));
+	}
+	
+	@ExceptionHandler(RereadConfirmationRequiredException.class)
+	public ResponseEntity<Map<String, Object>> handleRereadConfirmationRequired(RereadConfirmationRequiredException ex) {
+    	return ResponseEntity.status(HttpStatus.CONFLICT)
+        	    .body(Map.of("status", 409, "title", "Reread Confirmation Required", "detail", ex.getMessage()));
+	}
+
+	@ExceptionHandler(InvalidReadingStatusException.class)
+	public ResponseEntity<Map<String, Object>> handleInvalidReadingStatus(InvalidReadingStatusException ex) {
+    	return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+        	    .body(Map.of("status", 400, "title", "Invalid Reading Status", "detail", ex.getMessage()));
+	}
+	
+	@ExceptionHandler(ReadingInstanceNotFoundException.class)
+	public ResponseEntity<Map<String, Object>> handleReadingInstanceNotFound(ReadingInstanceNotFoundException ex) {
+ 	   return ResponseEntity.status(HttpStatus.NOT_FOUND)
+    	        .body(Map.of("status", 404, "title", "Reading Instance Not Found", "detail", ex.getMessage()));
+	}
+	
+	@ExceptionHandler(InvalidReadingSessionException.class)
+	public ResponseEntity<Map<String, Object>> handleInvalidReadingSession(InvalidReadingSessionException ex) {
+    	return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+        	    .body(Map.of("status", 400, "title", "Invalid Reading Session", "detail", ex.getMessage()));
 	}
 }

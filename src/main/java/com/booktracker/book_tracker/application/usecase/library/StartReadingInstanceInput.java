@@ -9,7 +9,8 @@ public record StartReadingInstanceInput(
         UUID userId,
         UUID userBookId,
         ReadingStatus status,
-        Integer currentPage,   // nullable, user-supplied only
-        LocalDate startDate,   // nullable, explicit user override
-        LocalDate endDate      // nullable, explicit user override
+        Integer currentPage,    // nullable, user-supplied only
+        LocalDate startDate,    // nullable, explicit user overrid
+        LocalDate endDate,      // nullable, explicit user override
+        Boolean confirmReread   // required true only when a reread is actually being started
 ) {}

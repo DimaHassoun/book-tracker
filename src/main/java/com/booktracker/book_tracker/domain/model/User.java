@@ -3,6 +3,14 @@ package com.booktracker.book_tracker.domain.model;
 import java.time.Instant;
 import java.util.UUID;
 
+/**
+ * A registered reader. Plain domain object — no JPA annotations, no
+ * framework dependencies, per the Clean Architecture dependency rule.
+ * Persistence concerns (column names, table mapping) live entirely in
+ * {@link com.booktracker.book_tracker.infrastructure.persistence.entity.UserEntity}
+ * and its mapper.
+ */
+
 public class User {
 
     private UUID id;

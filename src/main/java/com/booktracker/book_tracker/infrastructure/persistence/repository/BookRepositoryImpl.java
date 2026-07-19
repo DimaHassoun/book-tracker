@@ -7,6 +7,8 @@ import com.booktracker.book_tracker.infrastructure.persistence.mapper.BookEntity
 import org.springframework.stereotype.Repository;
 import com.booktracker.book_tracker.domain.valueobject.ExternalSource;
 import java.time.Instant;
+import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -43,5 +45,12 @@ public class BookRepositoryImpl implements BookRepository {
                 externalSource,
                 externalId)
             .map(mapper::toDomain);
+    }
+
+    @Override
+    public List<Book> findByIds(Collection<UUID> ids) {
+        return jpaBookRepository.findAllById(ids).stream()
+                .map(mapper::toDomain)
+                .toList();
     }
 }
